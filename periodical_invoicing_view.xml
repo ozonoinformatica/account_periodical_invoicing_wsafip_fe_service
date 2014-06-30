@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_account_periodical_invocing_agreement_form" model="ir.ui.view">
+            <field name="name">account.periodical_invoicing.agreement_journal.form</field>
+            <field name="inherit_id" ref="account_periodical_invoicing.view_account_periodical_invocing_agreement_form"/>
+            <field name="model">account.periodical_invoicing.agreement</field>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="replace">
+                    <field name="partner_id" on_change="onchange_partner_id(partner_id, company_id)"/>
+                </field>
+                <field name="period_type" position="after">
+                    <field name="journal_id" string="Diario"/>
+                </field>
+                <field name="discount" position="after">
+        	        <field name="agreement_line_tax_id" widget="many2many_tags" context="{'type':'out_invoice'}"
+            			domain="[('parent_id','=',False),('company_id', '=', parent.company_id)]"/>
+					<field name="price_subtotal"/>
+
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
